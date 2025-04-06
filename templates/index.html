@@ -10,6 +10,7 @@
     <script>
         function submitQuery() {
             var query = document.getElementById('query').value;
+            console.log(query)
             fetch('/query', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({query: query})})
                 .then(response => response.json())
                 .then(data => {

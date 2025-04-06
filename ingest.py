@@ -51,7 +51,7 @@ for filename in os.listdir('downloads'):
 # Split and clean metadata
 if documents:
     print(f"Total documents loaded: {len(documents)}")
-    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
+    text_splitter = CharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
     texts = text_splitter.split_documents(documents)
     filtered_texts = filter_complex_metadata(texts)  # Critical fix
     

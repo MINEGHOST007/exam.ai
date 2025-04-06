@@ -56,7 +56,7 @@ def query():
     
     for doc, score in results:
         # Use a relevance threshold (e.g., score must be > 0.5)
-        if score > 0.5:
+        if score > 0.1:
             meta = doc.metadata
             name = meta.get('name', '')
             
@@ -85,10 +85,6 @@ def query():
             
             print(f"Found unique assessment: {name}")
             unique_assessments[name] = assessment
-            
-            # Stop once we have 10 unique assessments
-            if len(unique_assessments) >= 10:
-                break
     
     # Convert the dictionary values to a list
     assessment_list = list(unique_assessments.values())
