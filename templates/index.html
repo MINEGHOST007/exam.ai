@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <input type="text" id="query" placeholder="Enter query or URL">
+    <button onclick="submitQuery()">Submit</button>
+    <div id="results"></div>
+    <script>
+        function submitQuery() {
+            var query = document.getElementById('query').value;
+            fetch('/query', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({query: query})})
+                .then(response => response.json())
+                .then(data => {
+                    var resultsDiv = document.getElementById('results');
+                    var table = '<table><tr><th>Name</th><th>URL</th><th>Remote Testing</th><th>Adaptive</th><th>Duration</th><th>Test Type</th></tr>';
+                    data.assessments.forEach(ass => {
+                        table += `<tr><td>${ass.name}</td><td><a href="${ass.url}">${ass.url}</a></td><td>${ass.remote_testing}</td><td>${ass.adaptive}</td><td>${ass.duration}</td><td>${ass.test_type}</td></tr>`;
+                    });
+                    resultsDiv.innerHTML = table + '</table>';
+                });
+        }
+    </script>
+</body>
+</html>
